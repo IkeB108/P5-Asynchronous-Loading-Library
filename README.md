@@ -43,6 +43,7 @@ function draw(){
 ```
 ## How to Use
 ### Syntax
+In your `setup` function, write:
 ```javascript
 myFileLoader = new FileLoader(filesToLoad, [dumpObject], [hideAutoFillLogs])
 ```
