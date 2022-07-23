@@ -1,5 +1,5 @@
 # P5 Asynchronous Loading Library
-A simple Javascript library for P5JS that makes asynchronous loading easy and seemless.
+A simple Javascript library for P5JS that makes asynchronous loading easy and seemless. You can draw things to the canvas while files are still loading.
 ## Example usage
 ```javascript
 function setup(){
@@ -29,13 +29,14 @@ function onLoadComplete(){
 function draw(){
   background(0)
   
-  if(myLoader.complete){
+  if(myFileLoader.complete){
     image(sunsetPicture, 0, 0)
     image(oceanPicture, 200, 0)
   }
-  if(!myLoader.complete){
+  if(!myFileLoader.complete){
     fill(255);
     text("Loading...", 100, 100)
+    text("Progress: " + myFileLoader.progress + "/" + myFileLoader.completion, 100, 200)
   }
   
 }
@@ -58,7 +59,8 @@ filesToLoad = {
   
 }
 ```
-If the fileLoader is not told which of p5's load functions to use (e.g. loadImage, loadSound, loadJSON) then it will guess based on the file extension (see [this chart](https://github.com/IkeB108/P5-Asyncronous-Loading-Library/blob/main/fileExtensionsMapping.txt)). If the file extension is unfamiliar, it will use `loadBytes`.
+If the fileLoader is not told which of p5's load functions to use (e.g. loadImage, loadSound, loadJSON) then it will guess based on the file extension (see [this list](https://github.com/IkeB108/P5-Asyncronous-Loading-Library/blob/main/fileExtensionsMapping.txt)). If the file extension is unfamiliar, it will use loadBytes.
+
 `dumpObject` (optional)
 
 The object in which you would like the loaded images/sounds/etc to be stored. Default is `window` (making the images/sounds/etc global variables).
@@ -66,3 +68,10 @@ The object in which you would like the loaded images/sounds/etc to be stored. De
 `hideAutoFillLogs` (optional)
 
 Boolean. When true, FileLoader will not log a message to the console when it autodetects file types for you. Default is `false`.
+## Other Features
+- If you write a function called `onLoadComplete`, it will be triggered as soon as the files finish loading (see the example usage above).
+- `myFileLoader.complete`: A boolean which stores whether or not all files have been loaded (or at least attempted to load)
+- `myFileLoader.progress`: A number storing how many files have loaded (or at least attempted to load) so far
+- `myFileLoader.completion`: A number storing how many files there are to load in total
+- `myFileLoader.successCount`: A number storing how many files have successfully loaded
+- `myFileLoader.failCount`: A number storing how many files have failed to load
