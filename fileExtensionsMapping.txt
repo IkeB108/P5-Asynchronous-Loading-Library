@@ -1,0 +1,29 @@
+What p5 loading function will fileLoader use given the file extension?
+
+loadImage:
+  jpg jpeg png gif webp tiff psd raw bmp heif indd svg ai eps pdf
+
+loadSound:
+  mp3 wav ogg
+
+loadFont:
+  otf ttf
+
+loadModel:
+  obj stl
+
+loadShader:
+  (loading shaders is not currently supported. Feel free to use preload)
+
+loadJSON:
+  json
+
+loadTable:
+  csv ods
+
+loadXML:
+  docx xlsx pptx doc xls ppt docm xlsm pptm
+
+loadStrings:
+  txt
+  (for other text filetypes like html or js, you will have to specify to use loadStrings)
