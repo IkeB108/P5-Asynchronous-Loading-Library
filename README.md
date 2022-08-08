@@ -1,5 +1,5 @@
 # P5 Asynchronous Loading Library
-A simple Javascript library for P5JS that makes asynchronous loading easy and seemless. You can draw things to the canvas while files are still loading.
+A simple Javascript library for P5JS that makes asynchronous loading easy and seamless. You can draw things to the canvas while files are still loading.
 ## Example usage
 ```javascript
 function setup(){
