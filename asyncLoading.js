@@ -47,6 +47,39 @@ function FileLoader( filesToLoadObject, dumpObject = window, hideAutofills ){
   }
   let _filesList = {};
   
+  let _itemsThatMeet_multiple = function(myArray, list_of_funcs, return_indeces) {
+    var ret = [];
+    var t = [...myArray]
+    for(var i = 0; i < list_of_funcs.length; i ++){
+      var itemFound = null;
+      for(var j = 0; j < t.length; j ++){
+        if( list_of_funcs[i](t[j]) ){
+          if(!return_indeces)itemFound = t[j]
+          if(return_indeces)itemFound = j
+        }
+      }
+      ret.push(itemFound)
+    }
+    return ret;
+  }
+  
+  let _itemsThatMeet = function(arr1, function_returns_boolean, return_indeces){
+    if(typeof function_returns_boolean == "object"){ //array
+      return _itemsThatMeet_multiple( arr1, function_returns_boolean, return_indeces )
+    } else {
+      var rets = [];
+      for(var i = 0; i < arr1.length; i ++){
+        if( function_returns_boolean(arr1[i]) ){
+          if(return_indeces)rets.push(i)
+          else rets.push(arr1[i])
+        }
+      }
+      if(rets.length == 1)rets = rets[0];
+      if(rets.length == 0){rets = null;}
+      return rets;
+    }
+  }
+  
   for(i in filesToLoadObject){
     let f = filesToLoadObject[i];
     
@@ -59,10 +92,10 @@ function FileLoader( filesToLoadObject, dumpObject = window, hideAutofills ){
       thisFileName = f;
     }
     if(typeof f == "object"){ //assume it's an array
-      let ordered_f = f.itemsThatMeet([
+      let ordered_f = _itemsThatMeet(f, [
         (n)=>{return typeof n == "string"},
         (n)=>{return typeof n == "function" && n.name == "bound "},
-      ], true) //ike.js
+      ], true)
       
       let fCopy = [...f]
       let index_of_loader = ordered_f[1];
