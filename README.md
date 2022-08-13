@@ -69,6 +69,7 @@ The object in which you would like the loaded images/sounds/etc to be stored. De
 `hideAutoFillLogs` (optional)
 
 Boolean. When true, FileLoader will not log a message to the console when it autodetects file types for you. Default is `false`.
+
 ## Other Features
 - If you write a function called `onLoadComplete`, it will be triggered as soon as the files finish loading (see the example usage above).
 - `myFileLoader.complete`: A boolean which stores whether or not all files have been loaded (or at least attempted to load)
@@ -76,3 +77,9 @@ Boolean. When true, FileLoader will not log a message to the console when it aut
 - `myFileLoader.completion`: A number storing how many files there are to load in total
 - `myFileLoader.successCount`: A number storing how many files have successfully loaded
 - `myFileLoader.failCount`: A number storing how many files have failed to load
+
+## Sound Element Loader
+If you want to load your sound files as plain HTML audio elements (instead of P5 Sound objects), create a SoundElementLoader instead of a FileLoader. The arguments are exactly the same as with the FileLoader (except there is no third argument because it logs nothing to the console).
+```javascript
+let mySoundElementLoader = new SoundElementLoader( filesToLoadObject, [dumpObject] )
+```
